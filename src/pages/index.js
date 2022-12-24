@@ -14,13 +14,8 @@ import Confetti from 'react-confetti'
 
 const IndexPage = () => { 
 
-  if (typeof window !== 'undefined') {
-    windowWidth = window.innerWidth
-    windowHeight = window.innerHeight
-  } else {
-    windowWidth = 1024
-    windowHeight = 768
-  }
+  let windowWidth = (typeof window !== 'undefined') ? window.innerWidth : 1024
+  let windowHeight = (typeof window !== 'undefined') ? window.innerHeight : 1024
 
   return (
     <Layout>

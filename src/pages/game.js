@@ -20,13 +20,8 @@ const reds = ['#8C0000', '#BD2000', '#FA1E0E', '#FFBE0F']
 const greens = ['#425F57', '#749F82', '#A8E890', '#CFFF8D']
 
 const Game = () => {
-  if (typeof window !== 'undefined') {
-    windowWidth = window.innerWidth
-    windowHeight = window.innerHeight
-  } else {
-    windowWidth = 1024
-    windowHeight = 768
-  }
+  let windowWidth = (typeof window !== 'undefined') ? window.innerWidth : 1024
+  let windowHeight = (typeof window !== 'undefined') ? window.innerHeight : 1024
 
   const [count, setCount] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
