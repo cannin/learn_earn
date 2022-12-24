@@ -10,11 +10,17 @@ import { Seo } from "../components/seo"
 
 import Confetti from 'react-confetti'
 
-import { useWindowSize } from "react-use"
+//import { useWindowSize } from "react-use"
 
 const IndexPage = () => { 
 
-  const { windowWidth, windowHeight } = useWindowSize()
+  if (typeof window !== 'undefined') {
+    windowWidth = window.innerWidth
+    windowHeight = window.innerHeight
+  } else {
+    windowWidth = 1024
+    windowHeight = 768
+  }
 
   return (
     <Layout>
@@ -24,7 +30,7 @@ const IndexPage = () => {
             <h1 className="fw-light">Hello world ! </h1>
             <p className="lead text-muted"> Welcome to this Boostrap 5 Gatsby Starter</p>
             <p>
-              <FontAwesomeIcon icon={faPiggyBank} size="4x" />
+              <FontAwesomeIcon icon={faPiggyBank} size="10x" />
             </p>
 
             <h2>Instruction</h2>
