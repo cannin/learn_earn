@@ -158,7 +158,7 @@ const Game = () => {
     if(isReady) {
       //console.log("HIT")
       let tmp = remainder + (correctCount * payout)
-      tmp = tmp.toFixed(2)
+      //tmp = tmp.toFixed(2)
       localStorage.setItem('remainder', tmp)
 
       setRemainder(tmp)
@@ -186,7 +186,7 @@ const Game = () => {
         />
         <h1>Game: { game }</h1>
         
-        <p>Payout: { payout.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
+        <p>Payout Per Question: { payout.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
         <p>Remainder: { remainder.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
 
         <p>Clicked: { count }</p>
