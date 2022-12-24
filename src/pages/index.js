@@ -42,7 +42,7 @@ const IndexPage = () => {
               className="img-fluid"
             />
 
-            <Confetti width={ windowWidth } height={ windowHeight } />
+            <Confetti width={ windowWidth } height={ windowHeight } colors={ ['#FFD700'] } />
 
           </div>
         </div>
