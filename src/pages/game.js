@@ -36,7 +36,7 @@ const Game = () => {
 
   const tmp = useStaticQuery(graphql`
     query {
-      allMultiplicationAnkiTxt(limit: 20) {
+      allMultiplicationAnkiTxt(limit: 300) {
         nodes {
           question
           answer
@@ -45,7 +45,7 @@ const Game = () => {
     }
   `)
   let data = tmp.allMultiplicationAnkiTxt.nodes
-  //data = _.shuffle(data)
+  data = _.shuffle(data)
 
   const [question, setQuestion] = useState(data[0]["question"])
   const [answer, setAnswer] = useState(data[0]["answer"])
@@ -213,13 +213,13 @@ const Game = () => {
           <button id="answer-question" type="submit" className="btn btn-primary">Done</button>
         </form>
 
-        <p><b>{ JSON.stringify(data) }</b></p>
-
         <Link to="/">Go back to the homepage</Link>
       </div>
     </Layout>
   )
 }
+
+//        <p><b>{ JSON.stringify(data) }</b></p>
 
 export default Game
 
