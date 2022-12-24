@@ -17,17 +17,18 @@ import config from "../../site-config"
 
 /*
 TODO
-* Show correct answer
-* Daily limit
 * Pin
 * Stats: Total payout, total games
 * Fix innerWidth
-* Better error
-* Test other questions
 * Stopwatch
-* Add logo
 * Confetti green all the way down
+* Confetti other icons
 * Offline 
+* Add logo
+* Daily limit (DONE)
+* Better error (IGNORE)
+* Show correct answer (DONE)
+* Test other questions (DONE)
 * Better background (IGNORE)
 * Better home (DONE)
 * Netlify ENV (DONE)
@@ -43,6 +44,7 @@ const allColors = [
     '#FF5722', '#795548']
 const reds = ['#8C0000', '#BD2000', '#FA1E0E', '#FFBE0F']
 const greens = ['#425F57', '#749F82', '#A8E890', '#CFFF8D']
+const confettiCount = 2000
 
 const Game = () => {
   let windowWidth = 2048
@@ -183,8 +185,8 @@ const Game = () => {
   }
 
   const validateField = (value) => {
-    //const fieldType = /^-?\d+$/.test(value) ? "number" : "string"
-    const fieldType = "number"
+    const fieldType = /^-?\d+$/.test(value) ? "number" : "string"
+    //const fieldType = "number"
 
     console.log("Answer: " + answer + " UserAnswer: " + value + " FieldType: " + fieldType)
 
@@ -204,13 +206,13 @@ const Game = () => {
 
         if(isValid) {
           setColors(greens)
-          setPieces(2000)
+          setPieces(confettiCount)
           
           let curCorrectCount = correctCount + 1
           setCorrectCount(curCorrectCount)
         } else {
           setColors(reds)
-          setPieces(20)
+          setPieces(confettiCount)
 
           let curCorrectCount = correctCount > 0 ? correctCount - 1 : 0
           setCorrectCount(curCorrectCount)
@@ -237,10 +239,18 @@ const Game = () => {
 
         if(isValid) {
           setColors(greens)
-          setPieces(2000)
+          setPieces(confettiCount)
+          
+          let curCorrectCount = correctCount + 1
+          setCorrectCount(curCorrectCount)
         } else {
           setColors(reds)
-          setPieces(20)
+          setPieces(confettiCount)
+
+          let curCorrectCount = correctCount > 0 ? correctCount - 1 : 0
+          setCorrectCount(curCorrectCount)
+
+          setShowAnswer("initial")
         }
 
         confettiDrop()
@@ -326,7 +336,7 @@ const Game = () => {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={ () => { setParty(!party); setRun(true); setPieces(2000); setColors(allColors) } }
+            onClick={ () => { setParty(!party); setRun(true); setPieces(confettiCount); setColors(allColors) } }
           >
             Drop Confetti
           </button>
@@ -376,6 +386,11 @@ const Game = () => {
           </div>
         </div>
 */
+
+/*          drawShape={ ctx => {
+            ctx.font = "20px Arial"
+            ctx.fillText("💩", 0, 0)
+          }}*/
 
 export default Game
 
