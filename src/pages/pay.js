@@ -11,20 +11,23 @@ const PayPage = () => {
 
   let curRemainder = null
 
-  useEffect(() => {
+  useEffect(() => { // Must use or infinite render error
     if(localStorage.getItem('remainder')) {
-      curRemainder = localStorage.getItem('remainder')
+      const tmp = parseFloat(localStorage.getItem('remainder'))
+      setRemainder(tmp)
 
-      console.log("Storage: " + localStorage.getItem('remainder'))
+      console.log("remainder Storage: " + tmp)
     } else {
-      curRemainder = 0
+      setRemainder(0)
     }
   }, [])
 
-  //setRemainder(curRemainder)
-
   const handleInputChange = (e) => {
-    const value = e.target.value
+    let value = parseFloat(e.target.value)
+    if(Number.isNaN(value)) {
+      value = 0
+    }
+
     setPayout(value)
   }
 
@@ -36,6 +39,7 @@ const PayPage = () => {
       const t1 = (remainder - payout) 
       const t2 = t1 > 0 ? t1 : 0
       localStorage.setItem('remainder', t2)
+      setRemainder(t2)
       console.log("After Click: " + localStorage.getItem('remainder'))
     } else {
       console.log("ERROR: Payout less than 0")
@@ -50,15 +54,14 @@ const PayPage = () => {
         <p>Remainder: { remainder.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
         <p>Payout: { payout.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
 
-
         <div className="container">
           <div className="row">
             <div className="col-4"></div>
             <div className="col-4">
               <form className="payout" onSubmit={ handleOnSubmit }>
                 <div className="form-group py-2">
-                  <label htmlFor="payout" className="form-label">How Much to Payout?</label>
-                  <input type="text" className="form-control" id="payout" value={ payout } onChange={ handleInputChange } />
+                  <label htmlFor="payout" className="form-label">Payout Amount?</label>
+                  <input type="text" className="form-control" id="payout" onChange={ handleInputChange } />
                 </div>
                 <button id="payout-submit" type="submit" className="btn btn-primary">Done</button>
               </form>
