@@ -10,43 +10,50 @@ import { Seo } from "../components/seo"
 
 import Confetti from 'react-confetti'
 
-const IndexPage = () => (
-  <Layout>
-    <section className="py-5 text-center container">
-      <div className="row py-lg-5">
-        <div className="col-lg-6 col-md-8 mx-auto">
-          <h1 className="fw-light">Hello world ! </h1>
-          <p className="lead text-muted"> Welcome to this Boostrap 5 Gatsby Starter</p>
-          <p>
-            <FontAwesomeIcon icon={faPiggyBank} size="4x" />
-          </p>
+import { useWindowSize } from "react-use"
 
-          <h2>Instruction</h2>
-          <p>Solve 10 math examples as fast as possible.</p>
-          <p>Each correct answer gives a Coin.</p>
-          <p>Each wrong answer kills a Coin.</p>
+const IndexPage = () => { 
 
-          <StaticImage
-            src="../images/gatsby-astronaut.png"
-            width={300}
-            quality={95}
-            formats={["AUTO", "WEBP"]}
-            alt="A Gatsby astronaut"
-            className="img-fluid"
-          />
+  const { windowWidth, windowHeight } = useWindowSize()
 
-          <Confetti width={ 1325 } height={ 768 } />
+  return (
+    <Layout>
+      <section className="py-5 text-center container">
+        <div className="row py-lg-5">
+          <div className="col-lg-6 col-md-8 mx-auto">
+            <h1 className="fw-light">Hello world ! </h1>
+            <p className="lead text-muted"> Welcome to this Boostrap 5 Gatsby Starter</p>
+            <p>
+              <FontAwesomeIcon icon={faPiggyBank} size="4x" />
+            </p>
 
+            <h2>Instruction</h2>
+            <p>Solve 10 math examples as fast as possible.</p>
+            <p>Each correct answer gives a Coin.</p>
+            <p>Each wrong answer kills a Coin.</p>
+
+            <StaticImage
+              src="../images/gatsby-astronaut.png"
+              width={300}
+              quality={95}
+              formats={["AUTO", "WEBP"]}
+              alt="A Gatsby astronaut"
+              className="img-fluid"
+            />
+
+            <Confetti width={ windowWidth } height={ windowHeight } />
+
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <Link to="/about/" className="btn btn-primary my-2">About</Link>
-        <Link to="/game/" className="btn btn-secondary my-2">Go to Game</Link>
-        <Link to="/pay/" className="btn btn-secondary my-2">Go to Pay</Link>
-      </div>
-    </section>
-  </Layout>
-)
+        <div className="row">
+          <Link to="/about/" className="btn btn-primary my-2">About</Link>
+          <Link to="/game/" className="btn btn-secondary my-2">Go to Game</Link>
+          <Link to="/pay/" className="btn btn-secondary my-2">Go to Pay</Link>
+        </div>
+      </section>
+    </Layout>
+  )
+}
 
 export default IndexPage
 

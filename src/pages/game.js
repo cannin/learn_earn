@@ -9,6 +9,8 @@ import { Seo } from "../components/seo"
 
 import Confetti from 'react-confetti'
 
+import { useWindowSize } from "react-use"
+
 const allColors = [
     '#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', 
     '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', 
@@ -18,6 +20,8 @@ const reds = ['#8C0000', '#BD2000', '#FA1E0E', '#FFBE0F']
 const greens = ['#425F57', '#749F82', '#A8E890', '#CFFF8D']
 
 const Game = () => {
+  const { windowWidth, windowHeight } = useWindowSize()
+
   const [count, setCount] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
   
@@ -166,8 +170,8 @@ const Game = () => {
     <Layout>
       <div className="container text-center my-5">
         <Confetti 
-          width={ 1352 } 
-          height={ 768 } //FIXME WebpackError: ReferenceError: window is not defined
+          width={ windowWidth } 
+          height={ windowHeight } //FIXME WebpackError: ReferenceError: window is not defined
           style={{ pointerEvents: 'none' }}
           numberOfPieces={ pieces }
           recycle={ false }
