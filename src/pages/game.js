@@ -26,8 +26,8 @@ const Game = () => {
   const [pieces, setPieces] = useState(0)
   const [run, setRun] = useState(false)
 
-  const payout = parseFloat(process.env.GATSBY_PAYOUT)
-  const game = process.env.GATSBY_GAME
+  const payout = 0.01 //parseFloat(process.env.GATSBY_PAYOUT)
+  const game = "Multiplication" //process.env.GATSBY_GAME
 
   const tmp = useStaticQuery(graphql`
     query {
