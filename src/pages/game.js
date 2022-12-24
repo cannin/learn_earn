@@ -13,7 +13,7 @@ import { useWindowSize } from "react-use"
 
 import AnimatedText from 'react-animated-text-content'
 
-import config from "../../site.config"
+import config from "../../site-config"
 
 /*
 TODO
@@ -81,13 +81,19 @@ const Game = () => {
   let data = tmp.allQuestionsTxt.nodes
   data = _.shuffle(data)
 
-  const [question, setQuestion] = useState(data[0]["question"])
-  const [answer, setAnswer] = useState(data[0]["answer"])
+  const [question, setQuestion] = useState("Type '1' to Start")
+  const [answer, setAnswer] = useState(1)
   const [userAnswer, setUserAnswer] = useState("")
   const [answerValid, setAnswerValid] = useState(false)
   const [remainder, setRemainder] = useState(0)
   const [questionsRemaining, setQuestionsRemaining] = useState(payoutQuestions)
   const [dailyRemaining, setDailyRemaining] = useState(0)
+  const [showAnswer, setShowAnswer] = useState("none")
+
+  const [previousQuestion, setPreviousQuestion] = useState("")
+  const [previousAnswer, setPreviousAnswer] = useState("")
+
+  const [disableSubmit, setDisableSubmit] = useState("")
 
   useEffect(() => { // Must use or infinite render error
     if(localStorage.getItem('remainder')) {
@@ -105,7 +111,7 @@ const Game = () => {
 
       console.log("dailyRemaining Storage: " + tmp)
     } else {
-      setDailyRemaining(dailyLimit)
+      setDailyRemaining(dailyQuestions)
     }
   }, [])
 
@@ -129,6 +135,7 @@ const Game = () => {
   const handleInputChange = (e) => {
     const value = e.target.value
     setUserAnswer(value)
+    setShowAnswer("none")
     //setRun(false)
   }
 
@@ -145,6 +152,11 @@ const Game = () => {
     setQuestion(data[count]["question"])
     setAnswer(data[count]["answer"])
 
+    if(count > 0) {
+      setPreviousQuestion(question)
+      setPreviousAnswer(answer)
+    }
+
     // Reset
     if(questionsRemaining == 0) {
       setQuestionsRemaining(payoutQuestions)
@@ -153,7 +165,21 @@ const Game = () => {
       setQuestionsRemaining(questionsRemaining - 1)
     }
 
+    // Reset
+    if(dailyRemaining <= 0) {
+      setDailyRemaining(0)
+      setDisableSubmit(true)
+
+      console.log("disableSubmit: " + disableSubmit)
+    } else {
+      setDailyRemaining(dailyRemaining - 1)
+      localStorage.setItem('dailyRemaining', dailyRemaining)
+    }
+
     console.log("2. Question: " + question + " Answer: " + answer + " UserAnswer: " + userAnswer + " Count: " + count)
+
+    console.log("remainder Storage: " + remainder)
+    console.log("dailyRemaining Storage: " + dailyRemaining)
   }
 
   const validateField = (value) => {
@@ -188,6 +214,8 @@ const Game = () => {
 
           let curCorrectCount = correctCount > 0 ? correctCount - 1 : 0
           setCorrectCount(curCorrectCount)
+
+          setShowAnswer("initial")
         }
 
         confettiDrop()
@@ -257,9 +285,9 @@ const Game = () => {
         <h1>Game: { game }</h1>
         
         <p>Payout Per Question: { payout.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
-        <p>Remainder: { remainder.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
+        <p>Payout Remainder: { remainder.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
 
-        <p>Clicked: { count }</p>
+        <p>Answered: { count }; Daily Remaining: { dailyRemaining }</p>
         <p>Correct: { correctCount }; Payout: { (correctCount * payout).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
         <p>Questions Remaining for Payout: { questionsRemaining }</p>
 
@@ -271,16 +299,24 @@ const Game = () => {
           <div className="row">
             <div className="col-4"></div>
             <div className="col-4">
-              <form className="question-answer" onSubmit={ handleOnSubmit }>
-                <div className="form-group py-2">
-                  <input type="text" className="form-control" id="answer" value={ userAnswer } onChange={ handleInputChange } />
-                </div>
-                <button id="answer-question" type="submit" className="btn btn-primary">Done</button>
-              </form>
+              <fieldset disabled={disableSubmit}>
+                <form className="question-answer" onSubmit={ handleOnSubmit }>
+                  <div className="form-group py-2">
+                    <input type="text" className="form-control" id="answer" value={ userAnswer } onChange={ handleInputChange } />
+                  </div>
+                  <button id="answer-question" type="submit" className="btn btn-primary">Done</button>
+                </form>
+              </fieldset>
             </div>
             <div className="col-4"></div>
           </div>
-        </div> 
+        </div>
+
+        <div style={{ display: showAnswer }}>  
+          <h2>Previous Question</h2>
+          <p>Question: { previousQuestion }; Correct Answer: { previousAnswer }</p>
+        </div>
+
       </div>
     </Layout>
   )
@@ -317,6 +353,29 @@ const Game = () => {
         >
           Winner!
         </AnimatedText>*/
+
+/*        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Question: { question }</p>
+                <p>Correct Answer: { answer }</p>
+                <p>Your Answer: { userAnswer }</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+*/
 
 export default Game
 
