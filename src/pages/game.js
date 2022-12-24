@@ -166,8 +166,8 @@ const Game = () => {
     <Layout>
       <div className="container text-center my-5">
         <Confetti 
-          width={ window.innerWidth } 
-          height={ window.innerHeight } 
+          width={ 1352 } 
+          height={ 768 } //FIXME WebpackError: ReferenceError: window is not defined
           style={{ pointerEvents: 'none' }}
           numberOfPieces={ pieces }
           recycle={ false }
