@@ -1,6 +1,6 @@
 module.exports = {
-  payout: 0.01,
+  payout: 0.2,
   game: "Multiplication",
   payoutQuestions: 10,
-  dailyLimit: 1
+  dailyLimit: 10
 }
