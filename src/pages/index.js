@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+//import { StaticImage } from "gatsby-plugin-image"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPiggyBank } from '@fortawesome/free-solid-svg-icons'
@@ -22,27 +22,18 @@ const IndexPage = () => {
       <section className="py-5 text-center container">
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">
-            <h1 className="fw-light">Hello world ! </h1>
-            <p className="lead text-muted"> Welcome to this Boostrap 5 Gatsby Starter</p>
+            <h1 className="fw-light">Learn & Earn</h1>
+            <p className="lead text-muted">Earn money while answering questions</p>
             <p>
-              <FontAwesomeIcon icon={faPiggyBank} size="10x" />
+              <FontAwesomeIcon icon={faPiggyBank} size="8x" color="#DAA520" className="faa-tada animated" />
             </p>
 
-            <h2>Instruction</h2>
+            <h2>Instructions</h2>
             <p>Solve 10 math examples as fast as possible.</p>
-            <p>Each correct answer gives a Coin.</p>
-            <p>Each wrong answer kills a Coin.</p>
+            <p>Each correct answer gives a coin</p>
+            <p>Each wrong answer kills a coin</p>
 
-            <StaticImage
-              src="../images/gatsby-astronaut.png"
-              width={300}
-              quality={95}
-              formats={["AUTO", "WEBP"]}
-              alt="A Gatsby astronaut"
-              className="img-fluid"
-            />
-
-            <Confetti width={ windowWidth } height={ windowHeight } colors={ ['#FFD700'] } />
+            <Confetti width={ windowWidth } height={ windowHeight } colors={ ['#DAA520'] } />
 
           </div>
         </div>
@@ -56,6 +47,15 @@ const IndexPage = () => {
   )
 }
 
+/*            <StaticImage
+              src="../images/gatsby-astronaut.png"
+              width={300}
+              quality={95}
+              formats={["AUTO", "WEBP"]}
+              alt="A Gatsby astronaut"
+              className="img-fluid"
+            />
+*/
 export default IndexPage
 
 export const Head = () => (

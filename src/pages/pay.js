@@ -1,6 +1,5 @@
 import * as React from "react"
 import { useState, useEffect } from "react"
-import { Link } from 'gatsby'
 
 import Layout from "../components/layout"
 import {Seo} from "../components/seo"
@@ -55,7 +54,6 @@ const PayPage = () => {
           <button id="payout-submit" type="submit" className="btn btn-primary">Done</button>
         </form>
 
-        <Link to="/">Go back to the homepage</Link>
       </div>
     </Layout>
   )

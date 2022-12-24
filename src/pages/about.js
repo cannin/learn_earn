@@ -9,8 +9,8 @@ const AboutPage = () => (
     <div className="container my-5">
 
       <div className="container">
-        <h1 >TBA</h1>
-        <p>TBA</p>
+        <h1 >Learn & Earn</h1>
+        <p>Learn & Earn lets you make money by solving questions</p>
       </div>
       <Link to="/">Go back to the homepage</Link>
     </div>

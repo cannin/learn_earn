@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useState, useEffect } from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 
 import _ from "lodash"
 
@@ -10,6 +10,23 @@ import { Seo } from "../components/seo"
 import Confetti from 'react-confetti'
 
 import { useWindowSize } from "react-use"
+
+/*
+TODO
+* Daily limit
+* Pin
+* Stats: Total payout, total games
+* Fix innerWidth
+* About
+* Better home
+* Better error
+* Test other questions
+* Stopwatch
+* Smaller input box
+* Better background
+* Netlify ENV
+* Animate 
+*/
 
 const allColors = [
     '#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', 
@@ -36,7 +53,7 @@ const Game = () => {
 
   const tmp = useStaticQuery(graphql`
     query {
-      allMultiplicationAnkiTxt(limit: 300) {
+      allQuestionsTxt(limit: 1000) {
         nodes {
           question
           answer
@@ -44,7 +61,7 @@ const Game = () => {
       }
     }
   `)
-  let data = tmp.allMultiplicationAnkiTxt.nodes
+  let data = tmp.allQuestionsTxt.nodes
   data = _.shuffle(data)
 
   const [question, setQuestion] = useState(data[0]["question"])
@@ -191,8 +208,19 @@ const Game = () => {
 
         <p>Clicked: { count }</p>
         <p>Correct: { correctCount }; Payout: { (correctCount * payout).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
-        
-        <div className="party-container">
+
+        <h2>Question</h2>
+        <p>{ question }</p>
+
+        <h2>Answer</h2>
+        <form className="question-answer" onSubmit={ handleOnSubmit }>
+          <div className="form-group py-2 d-flex justify-content-center">
+            <input type="text" className="form-control" id="answer" value={ userAnswer } onChange={ handleInputChange } />
+          </div>
+          <button id="answer-question" type="submit" className="btn btn-primary">Done</button>
+        </form>
+
+        <div className="party-container py-3">
           <button
             type="button"
             className="btn btn-primary"
@@ -202,18 +230,6 @@ const Game = () => {
           </button>
         </div>
 
-        <h3>Question</h3>
-        <p>{ question }</p>
-
-        <form className="question-answer" onSubmit={ handleOnSubmit }>
-          <div className="form-group col-xs-3 py-1">
-            <label htmlFor="answer" className="form-label">Answer</label>
-            <input type="text" className="form-control" id="answer" value={ userAnswer } onChange={ handleInputChange } />
-          </div>
-          <button id="answer-question" type="submit" className="btn btn-primary">Done</button>
-        </form>
-
-        <Link to="/">Go back to the homepage</Link>
       </div>
     </Layout>
   )
