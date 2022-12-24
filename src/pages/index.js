@@ -35,7 +35,7 @@ const IndexPage = () => (
             className="img-fluid"
           />
 
-          <Confetti width={ window.innerWidth } height={  window.innerHeight } />
+          <Confetti width={ 1325 } height={ 768 } />
 
         </div>
       </div>
