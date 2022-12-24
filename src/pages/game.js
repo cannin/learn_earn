@@ -158,7 +158,7 @@ const Game = () => {
     if(isReady) {
       //console.log("HIT")
       let tmp = remainder + (correctCount * payout)
-      tmp = tmp.toFixed(3)
+      tmp = tmp.toFixed(2)
       localStorage.setItem('remainder', tmp)
 
       setRemainder(tmp)
