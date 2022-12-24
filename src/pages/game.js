@@ -11,21 +11,29 @@ import Confetti from 'react-confetti'
 
 import { useWindowSize } from "react-use"
 
+import AnimatedText from 'react-animated-text-content'
+
+import config from "../../site.config"
+
 /*
 TODO
+* Show correct answer
 * Daily limit
 * Pin
 * Stats: Total payout, total games
 * Fix innerWidth
-* About
-* Better home
 * Better error
 * Test other questions
 * Stopwatch
-* Smaller input box
-* Better background
-* Netlify ENV
-* Animate 
+* Add logo
+* Confetti green all the way down
+* Offline 
+* Better background (IGNORE)
+* Better home (DONE)
+* Netlify ENV (DONE)
+* Animate (DONE)
+* Smaller input box (DONE)
+* About (DONE)
 */
 
 const allColors = [
@@ -37,8 +45,13 @@ const reds = ['#8C0000', '#BD2000', '#FA1E0E', '#FFBE0F']
 const greens = ['#425F57', '#749F82', '#A8E890', '#CFFF8D']
 
 const Game = () => {
-  const windowWidth = (typeof window !== 'undefined') ? window.innerWidth : 2048
-  const windowHeight = (typeof window !== 'undefined') ? window.innerHeight : 1536
+  let windowWidth = 2048
+  let windowHeight = 1536
+
+  if(typeof window !== 'undefined') {
+    windowWidth = window.innerWidth
+    windowHeight = window.innerHeight
+  }
 
   const [count, setCount] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
@@ -48,8 +61,12 @@ const Game = () => {
   const [pieces, setPieces] = useState(0)
   const [run, setRun] = useState(false)
 
-  const payout = 0.01 //parseFloat(process.env.GATSBY_PAYOUT)
-  const game = "Multiplication" //process.env.GATSBY_GAME
+  // Parameters
+  const payout = config.payout
+  const game = config.game
+  const payoutQuestions = config.payoutQuestions
+  const dailyLimit = config.dailyLimit
+  const dailyQuestions = dailyLimit / payout
 
   const tmp = useStaticQuery(graphql`
     query {
@@ -69,17 +86,45 @@ const Game = () => {
   const [userAnswer, setUserAnswer] = useState("")
   const [answerValid, setAnswerValid] = useState(false)
   const [remainder, setRemainder] = useState(0)
+  const [questionsRemaining, setQuestionsRemaining] = useState(payoutQuestions)
+  const [dailyRemaining, setDailyRemaining] = useState(0)
 
   useEffect(() => { // Must use or infinite render error
     if(localStorage.getItem('remainder')) {
       const tmp = parseFloat(localStorage.getItem('remainder'))
       setRemainder(tmp)
 
-      console.log("Storage: " + tmp)
+      console.log("remainder Storage: " + tmp)
     } else {
       setRemainder(0)
     }
+
+    if(localStorage.getItem('dailyRemaining')) {
+      const tmp = parseFloat(localStorage.getItem('dailyRemaining'))
+      setDailyRemaining(tmp)
+
+      console.log("dailyRemaining Storage: " + tmp)
+    } else {
+      setDailyRemaining(dailyLimit)
+    }
   }, [])
+
+  const checkResetDaily = () => {
+    let startTime = '0'
+    let endTime = '5'
+
+    let currentDate = new Date()
+
+    let startDate = new Date(currentDate.getTime())
+    startDate.setHours(startTime)
+
+    let endDate = new Date(currentDate.getTime())
+    endDate.setHours(endTime)
+
+    let valid = startDate < currentDate && endDate > currentDate
+
+    return(valid)
+  }
 
   const handleInputChange = (e) => {
     const value = e.target.value
@@ -99,6 +144,14 @@ const Game = () => {
     setCount(tmp)
     setQuestion(data[count]["question"])
     setAnswer(data[count]["answer"])
+
+    // Reset
+    if(questionsRemaining == 0) {
+      setQuestionsRemaining(payoutQuestions)
+      setCorrectCount(0)
+    } else {
+      setQuestionsRemaining(questionsRemaining - 1)
+    }
 
     console.log("2. Question: " + question + " Answer: " + answer + " UserAnswer: " + userAnswer + " Count: " + count)
   }
@@ -169,7 +222,7 @@ const Game = () => {
         break
     }
 
-    const isReady = count > 1 && count % 10 == 0
+    const isReady = count > 1 && count % payoutQuestions == 0
     console.log("Count: " + count + " Test: " + JSON.stringify(isReady))
 
     if(isReady) {
@@ -208,19 +261,32 @@ const Game = () => {
 
         <p>Clicked: { count }</p>
         <p>Correct: { correctCount }; Payout: { (correctCount * payout).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
+        <p>Questions Remaining for Payout: { questionsRemaining }</p>
 
         <h2>Question</h2>
         <p>{ question }</p>
 
         <h2>Answer</h2>
-        <form className="question-answer" onSubmit={ handleOnSubmit }>
-          <div className="form-group py-2 d-flex justify-content-center">
-            <input type="text" className="form-control" id="answer" value={ userAnswer } onChange={ handleInputChange } />
+        <div className="container">
+          <div className="row">
+            <div className="col-4"></div>
+            <div className="col-4">
+              <form className="question-answer" onSubmit={ handleOnSubmit }>
+                <div className="form-group py-2">
+                  <input type="text" className="form-control" id="answer" value={ userAnswer } onChange={ handleInputChange } />
+                </div>
+                <button id="answer-question" type="submit" className="btn btn-primary">Done</button>
+              </form>
+            </div>
+            <div className="col-4"></div>
           </div>
-          <button id="answer-question" type="submit" className="btn btn-primary">Done</button>
-        </form>
+        </div> 
+      </div>
+    </Layout>
+  )
+}
 
-        <div className="party-container py-3">
+/*        <div className="party-container py-3">
           <button
             type="button"
             className="btn btn-primary"
@@ -228,14 +294,29 @@ const Game = () => {
           >
             Drop Confetti
           </button>
-        </div>
-
-      </div>
-    </Layout>
-  )
-}
+        </div>*/
 
 //        <p><b>{ JSON.stringify(data) }</b></p>
+
+/*        <AnimatedText
+          type="chars"
+          animation={{
+            x: '200px',
+            y: '-20px',
+            scale: 1.1,
+            ease: 'ease-in-out',
+          }}
+          animationType="wave"
+          interval={0.06}
+          duration={0.8}
+          tag="p"
+          className="animated-text"
+          includeWhiteSpaces
+          threshold={0.1}
+          rootMargin="20%"
+        >
+          Winner!
+        </AnimatedText>*/
 
 export default Game
 

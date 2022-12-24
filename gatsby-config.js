@@ -39,6 +39,12 @@ module.exports = {
         icon: `src/images/red_square_80x80.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [`/`, `/game/`, `/about/`],
+      },
+    },
     `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-gatsby-cloud`,
     {

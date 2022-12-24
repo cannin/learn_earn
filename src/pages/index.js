@@ -1,53 +1,56 @@
 import * as React from "react"
 import { Link } from "gatsby"
-//import { StaticImage } from "gatsby-plugin-image"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPiggyBank } from '@fortawesome/free-solid-svg-icons'
+import { faPiggyBank, faMoneyBill1Wave } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from "../components/layout"
 import { Seo } from "../components/seo"
 
 import Confetti from 'react-confetti'
 
-//import { useWindowSize } from "react-use"
+import { useWindowSize } from "react-use"
 
 const IndexPage = () => { 
 
-  const windowWidth = (typeof window !== 'undefined') ? window.innerWidth : 2048
-  const windowHeight = (typeof window !== 'undefined') ? window.innerHeight : 1536
+  let windowWidth = 2048
+  let windowHeight = 1536
+
+  if(typeof window !== 'undefined') {
+    windowWidth = window.innerWidth
+    windowHeight = window.innerHeight
+  }
 
   return (
     <Layout>
-      <section className="py-5 text-center container">
-        <div className="row py-lg-5">
+      <div className="container text-center py-5">
+        <div className="row">
           <div className="col-lg-6 col-md-8 mx-auto">
             <h1 className="fw-light">Learn & Earn</h1>
             <p className="lead text-muted">Earn money while answering questions</p>
             <p>
-              <FontAwesomeIcon icon={faPiggyBank} size="8x" color="#DAA520" className="faa-tada animated" />
+              <FontAwesomeIcon icon={faPiggyBank} size="6x" color="#DAA520" className="faa-tada animated" />
             </p>
 
             <h2>Instructions</h2>
-            <p>Solve 10 math examples as fast as possible.</p>
+            <p>Answer questions as fast as possible</p>
             <p>Each correct answer gives a coin</p>
-            <p>Each wrong answer kills a coin</p>
-
-            <Confetti width={ windowWidth } height={ windowHeight } colors={ ['#DAA520'] } />
-
+            <p>Each wrong answer takes a coin</p>
           </div>
         </div>
-        <div className="row">
-          <Link to="/about/" className="btn btn-primary my-2">About</Link>
-          <Link to="/game/" className="btn btn-secondary my-2">Go to Game</Link>
-          <Link to="/pay/" className="btn btn-secondary my-2">Go to Pay</Link>
+        <div className="d-flex flex-column justify-content-center">
+          <div className="p-1"><Link to="/game/" className="btn btn-primary">Go to Game</Link></div>
+          <div className="p-1"><Link to="/about/" className="btn btn-secondary">Go to About</Link></div>
         </div>
-      </section>
+        <Confetti width={ windowWidth } height={ windowHeight } colors={ ['#DAA520', '#C0C0C0'] } />
+      </div>
     </Layout>
   )
 }
 
-/*            <StaticImage
+/*
+            import { StaticImage } from "gatsby-plugin-image"
+            <StaticImage
               src="../images/gatsby-astronaut.png"
               width={300}
               quality={95}

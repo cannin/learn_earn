@@ -6,12 +6,9 @@ import {Seo} from "../components/seo"
 
 const AboutPage = () => (
   <Layout>
-    <div className="container my-5">
-
-      <div className="container">
-        <h1 >Learn & Earn</h1>
-        <p>Learn & Earn lets you make money by solving questions</p>
-      </div>
+    <div className="container text-center my-5">
+      <h1 >Learn & Earn</h1>
+      <p>Learn & Earn lets you make money by solving questions</p>
       <Link to="/">Go back to the homepage</Link>
     </div>
   </Layout>
