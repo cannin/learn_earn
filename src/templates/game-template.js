@@ -303,8 +303,8 @@ export const Head = () => (
 
 // graphql call cannot be a function
 export const gameQuery = graphql`
-  query($setFilter: String!) {
-    allQuestionsAllTxt(filter: {set: {eq: $setFilter}}) {
+  query($set: String!) {
+    allQuestionsAllTxt(filter: {set: {eq: $set}}) {
       nodes {
         question
         answer

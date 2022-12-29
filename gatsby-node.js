@@ -4,46 +4,22 @@
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
 
-import config from "../../site-config"
-
 // TODO Add reporter to handle errors
 exports.createPages = async ({ actions, graphql }) => {
+  const sets = ['multiplication_10x', 'multiplication_20x', 'us_capitals']
+
   const path = require("path")
+  const { createPage } = actions
 
   const gameTemplate = path.resolve(`src/templates/game-template.js`)
 
-  const { createPage } = actions
-
-  const sets = config.gameSets
-
-    sets.forEach(setFilter => {
-      createPage({
-        path: `/game/${setFilter}/`,
-        component: gameTemplate,
-        context: {
-          setFilter: setFilter
-        },
-      })
+  sets.forEach(set => {
+    createPage({
+      path: `/game/${set}/`,
+      component: gameTemplate,
+      context: {
+        set: set
+      },
+    })
   })
 }
-
-
-
-//   // Make game pages
-//   sets.forEach(setFilter => {
-//     const result = graphql(
-//       `
-//         query($set: String!) {
-//             allQuestionsAllTxt(filter: {set: {eq: $set}}) {
-//               nodes {
-//                 question
-//                 answer
-//               }
-//             }
-//         }
-//       `,
-//       {
-//         set: set,
-//       },
-//     )
-// })

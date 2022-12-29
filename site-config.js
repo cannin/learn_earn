@@ -3,6 +3,7 @@ module.exports = {
   game: "Multiplication",
   payoutQuestions: 10,
   dailyLimit: 10,
-  debug: false,
-  gameSets: ['multiplication_10x', 'multiplication_20x', 'us_capitals']
+  debug: false
 }
+
+// Set gameSets in gatsby-node.js
