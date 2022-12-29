@@ -57,7 +57,6 @@ const Game = () => {
 
   const [count, setCount] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
-  
   const [party, setParty] = useState(false)
   const [colors, setColors ] = useState(allColors)
   const [pieces, setPieces] = useState(0)
@@ -68,6 +67,7 @@ const Game = () => {
   const game = config.game
   const payoutQuestions = config.payoutQuestions
   const dailyLimit = config.dailyLimit
+  //const sets = config.sets 
   const dailyQuestions = dailyLimit / payout
 
   const tmp = useStaticQuery(graphql`
@@ -195,7 +195,9 @@ const Game = () => {
     switch(fieldType) {
       case 'number':
         const formattedNumber = parseInt(value)
-        isValid = formattedNumber === answer
+
+        // Must be == or type problem
+        isValid = formattedNumber == answer
   
         console.log("Answer: " + answer + " UserAnswer: " + formattedNumber + " IsValid: " + isValid)
 
@@ -228,7 +230,8 @@ const Game = () => {
         const formattedString = value.toLowerCase().trim()
         const formattedAnswer = answer.toLowerCase().trim()
 
-        isValid = formattedString === formattedAnswer
+        // Must be == or type problem
+        isValid = formattedString == formattedAnswer
 
         console.log("Answer: " + formattedAnswer + " UserAnswer: " + formattedString + " IsValid: " + isValid)
 

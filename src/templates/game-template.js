@@ -17,17 +17,20 @@ const greens = ['#425F57', '#749F82', '#A8E890', '#CFFF8D']
 const confettiCount = 2000
 
 // export default cannot be an anonymous function
-export default function GameTemplate({data}) {
+export default function GameTemplate({ data, classes, pageContext }) {
   // Data
   //console.log("DATA 1: " + JSON.stringify(data))
   data = _.shuffle(data.allQuestionsAllTxt.nodes)
-  //console.log("DATA 2: " + JSON.stringify(data))
+  console.log("DATA 2: " + JSON.stringify(data))
+
+  //console.log("DATA 3: " + JSON.stringify(pageContext))
 
   // Parameters
   const payout = config.payout
-  const game = config.game
+  //const game = config.game
   const payoutQuestions = config.payoutQuestions
   const dailyLimit = config.dailyLimit
+  const sets = config.sets 
   const dailyQuestions = dailyLimit / payout
 
   let windowWidth = 2048
@@ -41,7 +44,7 @@ export default function GameTemplate({data}) {
   // State Parameters
   const [count, setCount] = useState(0)
   const [correctCount, setCorrectCount] = useState(0)
-  
+  const [gameName, setGameName] = useState(sets[pageContext.set])
   const [party, setParty] = useState(false)
   const [colors, setColors ] = useState(greens)
   const [pieces, setPieces] = useState(0)
@@ -159,7 +162,8 @@ export default function GameTemplate({data}) {
     switch(fieldType) {
       case 'number':
         const formattedNumber = parseInt(value)
-        isValid = formattedNumber === answer
+        // Must be == or type problem
+        isValid = formattedNumber == answer
   
         console.log("Answer: " + answer + " UserAnswer: " + formattedNumber + " IsValid: " + isValid)
 
@@ -192,7 +196,8 @@ export default function GameTemplate({data}) {
         const formattedString = value.toLowerCase().trim()
         const formattedAnswer = answer.toLowerCase().trim()
 
-        isValid = formattedString === formattedAnswer
+        // Must be == or type problem
+        isValid = formattedString == formattedAnswer
 
         console.log("Answer: " + formattedAnswer + " UserAnswer: " + formattedString + " IsValid: " + isValid)
 
@@ -256,7 +261,7 @@ export default function GameTemplate({data}) {
             confetti.reset()
           }}
         />
-        <h1>Game: { game }</h1>
+        <h1>Game: { gameName }</h1>
         
         {/* <p>Payout Per Question: { payout.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p> */}
         {/* <p>Answered: { count }; Daily Remaining: { dailyRemaining }</p> */}
@@ -312,5 +317,3 @@ export const gameQuery = graphql`
     }
   }
 `
-
-

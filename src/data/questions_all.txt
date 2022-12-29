@@ -529,3 +529,23 @@ Washington	Olympia	us_capitals
 West Virginia	Charleston	us_capitals
 Wisconsin	Madison	us_capitals
 Wyoming	Cheyenne	us_capitals
+🐈	cat	animals
+🐺	dog	animals
+🦁	lion	animals
+🐅	tiger	animals
+🐴	horse	animals
+🐄	cow	animals
+🐷	pig	animals
+🐘	elephant	animals
+🦨	elephant	animals
+🐪	camel	animals
+🦙	llama	animals
+🦒	giraffe	animals
+🐁	mouse	animals
+🐇	rabbit	animals
+🐻	bear	animals
+🦘	kangaroo	animals
+🦃	turkey	animals
+🐒	monkey	animals
+🐧	penguin	animals
+🦇	bat	animals
