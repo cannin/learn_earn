@@ -1,67 +1,27 @@
 import * as React from "react"
-import { useState, useEffect } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import { graphql } from "gatsby"
 
-import _ from "lodash"
-
-import Layout from "../components/layout"
-//import Animation from "../components/animation"
+import Layout from '../components/layout'
 import { Seo } from "../components/seo"
 
-import Confetti from 'react-confetti'
+import { useState, useEffect } from 'react'
 
+import Confetti from 'react-confetti'
 //import { useWindowSize } from "react-use"
+import _ from "lodash"
 
 import config from "../../site-config"
 
-/*
-TODO
-* Stats: Total payout, total games
-* Fix innerWidth
-* Confetti green all the way down
-* Confetti other icons
-* Add logo
-* Translation
-* Stopwatch (IGNORE)
-* Pin (IGNORE)
-* Offline (DONE)
-* Daily limit (DONE)
-* Better error (IGNORE)
-* Show correct answer (DONE)
-* Test other questions (DONE)
-* Better background (IGNORE)
-* Better home (DONE)
-* Netlify ENV (DONE)
-* Animate (DONE)
-* Smaller input box (DONE)
-* About (DONE)
-*/
-
-const allColors = [
-    '#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', 
-    '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', 
-    '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', 
-    '#FF5722', '#795548']
 const reds = ['#8C0000', '#BD2000', '#FA1E0E', '#FFBE0F']
 const greens = ['#425F57', '#749F82', '#A8E890', '#CFFF8D']
 const confettiCount = 2000
 
-const Game = () => {
-  let windowWidth = 2048
-  let windowHeight = 1536
-
-  if(typeof window !== 'undefined') {
-    windowWidth = window.innerWidth
-    windowHeight = window.innerHeight
-  }
-
-  const [count, setCount] = useState(0)
-  const [correctCount, setCorrectCount] = useState(0)
-  
-  const [party, setParty] = useState(false)
-  const [colors, setColors ] = useState(allColors)
-  const [pieces, setPieces] = useState(0)
-  const [run, setRun] = useState(false)
+// export default cannot be an anonymous function
+export default function GameTemplate({data}) {
+  // Data
+  //console.log("DATA 1: " + JSON.stringify(data))
+  data = _.shuffle(data.allQuestionsAllTxt.nodes)
+  //console.log("DATA 2: " + JSON.stringify(data))
 
   // Parameters
   const payout = config.payout
@@ -70,18 +30,22 @@ const Game = () => {
   const dailyLimit = config.dailyLimit
   const dailyQuestions = dailyLimit / payout
 
-  const tmp = useStaticQuery(graphql`
-    query {
-      allQuestionsTxt(limit: 1000) {
-        nodes {
-          question
-          answer
-        }
-      }
-    }
-  `)
-  let data = tmp.allQuestionsTxt.nodes
-  data = _.shuffle(data)
+  let windowWidth = 2048
+  let windowHeight = 1536
+
+  if(typeof window !== 'undefined') {
+    windowWidth = window.innerWidth
+    windowHeight = window.innerHeight
+  }
+
+  // State Parameters
+  const [count, setCount] = useState(0)
+  const [correctCount, setCorrectCount] = useState(0)
+  
+  const [party, setParty] = useState(false)
+  const [colors, setColors ] = useState(greens)
+  const [pieces, setPieces] = useState(0)
+  const [run, setRun] = useState(false)
 
   const [question, setQuestion] = useState("Type '1' to Start")
   const [answer, setAnswer] = useState(1)
@@ -333,68 +297,20 @@ const Game = () => {
   )
 }
 
-/*        <div className="party-container py-3">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={ () => { setParty(!party); setRun(true); setPieces(confettiCount); setColors(allColors) } }
-          >
-            Drop Confetti
-          </button>
-        </div>*/
-
-//        <p><b>{ JSON.stringify(data) }</b></p>
-
-/*        <AnimatedText
-          type="chars"
-          animation={{
-            x: '200px',
-            y: '-20px',
-            scale: 1.1,
-            ease: 'ease-in-out',
-          }}
-          animationType="wave"
-          interval={0.06}
-          duration={0.8}
-          tag="p"
-          className="animated-text"
-          includeWhiteSpaces
-          threshold={0.1}
-          rootMargin="20%"
-        >
-          Winner!
-        </AnimatedText>*/
-
-/*        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>Question: { question }</p>
-                <p>Correct Answer: { answer }</p>
-                <p>Your Answer: { userAnswer }</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-*/
-
-/*          drawShape={ ctx => {
-            ctx.font = "20px Arial"
-            ctx.fillText("💩", 0, 0)
-          }}*/
-
-export default Game
-
 export const Head = () => (
-    <Seo title="Game" />
+    <Seo />
 )
+
+// graphql call cannot be a function
+export const gameQuery = graphql`
+  query($setFilter: String!) {
+    allQuestionsAllTxt(filter: {set: {eq: $setFilter}}) {
+      nodes {
+        question
+        answer
+      }
+    }
+  }
+`
+
+

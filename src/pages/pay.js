@@ -8,6 +8,7 @@ const PayPage = () => {
 
   const [payout, setPayout] = useState(0)
   const [remainder, setRemainder] = useState(0)
+  const [dailyRemaining, setDailyRemaining] = useState(0)
 
   let curRemainder = null
 
@@ -19,6 +20,13 @@ const PayPage = () => {
       console.log("remainder Storage: " + tmp)
     } else {
       setRemainder(0)
+    }
+
+    if(localStorage.getItem('dailyRemaining')) {
+      const tmp = parseFloat(localStorage.getItem('dailyRemaining'))
+      setDailyRemaining(tmp)
+
+      console.log("dailyRemaining Storage: " + tmp)
     }
   }, [])
 
@@ -52,6 +60,7 @@ const PayPage = () => {
 
         <h1>Payout</h1>
         <p>Remainder: { remainder.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
+        <p>Daily Remaining Questions: { dailyRemaining }</p>
         <p>Payout: { payout.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) }</p>
 
         <div className="container">

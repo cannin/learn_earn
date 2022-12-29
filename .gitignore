@@ -71,3 +71,5 @@ yarn-error.log
 
 #Intellij editor
 .idea
+README_notes.md
+*.apkg

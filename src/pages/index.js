@@ -2,14 +2,14 @@ import * as React from "react"
 import { Link } from "gatsby"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPiggyBank, faMoneyBill1Wave } from '@fortawesome/free-solid-svg-icons'
+import { faPiggyBank } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from "../components/layout"
 import { Seo } from "../components/seo"
 
 import Confetti from 'react-confetti'
 
-import { useWindowSize } from "react-use"
+//import { useWindowSize } from "react-use"
 
 const IndexPage = () => { 
 
@@ -33,14 +33,12 @@ const IndexPage = () => {
             </p>
 
             <h2>Instructions</h2>
-            <p>Answer questions as fast as possible</p>
-            <p>Each correct answer gives a coin</p>
-            <p>Each wrong answer takes a coin</p>
+            <p>Each correct answer gives money</p>
+            <p>Each wrong answer takes money</p>
           </div>
         </div>
         <div className="d-flex flex-column justify-content-center">
-          <div className="p-1"><Link to="/game/" className="btn btn-primary">Go to Game</Link></div>
-          <div className="p-1"><Link to="/about/" className="btn btn-secondary">Go to About</Link></div>
+          <div className="p-1"><Link to="/game/" className="btn btn-primary">Play Game</Link></div>
         </div>
         <Confetti width={ windowWidth } height={ windowHeight } colors={ ['#DAA520', '#C0C0C0'] } />
       </div>

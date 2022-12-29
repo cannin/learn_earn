@@ -30,8 +30,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `learn_earn`,
-        short_name: `learn_earn`,
+        name: `Learn & Earn`,
+        short_name: `Learn & Earn`,
         start_url: `/`,
         background_color: `#CC0000`,
         theme_color: `#CC0000`,
@@ -42,7 +42,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-offline`,
       options: {
-        precachePages: [`/`, `/game/`, `/about/`],
+        precachePages: [`/`, `/game/`, `/pay`, `/about/`],
       },
     },
     `gatsby-plugin-fontawesome-css`,
