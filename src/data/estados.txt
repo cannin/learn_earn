@@ -1,0 +1,32 @@
+question	answer
+Aguascalientes	Aguascalientes
+Baja California	Mexicali
+Baja California Sur	La Paz
+Campeche	Campeche
+Chiapas	Tuxtla Gutiérrez
+Chihuahua	Chihuahua
+Coahuila	Saltillo
+Colima	Colima
+Durango	Durango
+Guanajuato	Guanajuato
+Guerrero	Chilpancingo
+Hidalgo	Pachuca
+Jalisco	Guadalajara
+Estado de México	Toluca
+Michoacán	Morelia
+Morelos	Cuernavaca
+Nayarit	Tepic
+Nuevo León	Monterrey
+Oaxaca	Oaxaca
+Puebla	Puebla
+Querétaro	Querétaro
+Quintana Roo	Chetumal
+San Luis Potosí	San Luis Potosí
+Sinaloa	Culiacán
+Sonora	Hermosillo
+Tabasco	Villahermosa
+Tamaulipas	Ciudad Victoria
+Tlaxcala	Tlaxcala
+Veracruz	Xalapa
+Yucatán	Mérida
+Zacatecas	Zacatecas

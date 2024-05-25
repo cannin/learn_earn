@@ -21,7 +21,7 @@ export default function GameTemplate({ data, classes, pageContext }) {
   // Data
   //console.log("DATA 1: " + JSON.stringify(data))
   data = _.shuffle(data.allQuestionsAllTxt.nodes)
-  console.log("DATA 2: " + JSON.stringify(data))
+  console.log("DATA: " + JSON.stringify(data))
 
   //console.log("DATA 3: " + JSON.stringify(pageContext))
 

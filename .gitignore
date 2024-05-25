@@ -73,3 +73,4 @@ yarn-error.log
 .idea
 README_notes.md
 *.apkg
+/ignore_del

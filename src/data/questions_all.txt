@@ -549,3 +549,34 @@ Wyoming	Cheyenne	us_capitals
 🐒	monkey	animals
 🐧	penguin	animals
 🦇	bat	animals
+Aguascalientes	Aguascalientes	estados
+Baja California	Mexicali	estados
+Baja California Sur	La Paz	estados
+Campeche	Campeche	estados
+Chiapas	Tuxtla Gutiérrez	estados
+Chihuahua	Chihuahua	estados
+Coahuila	Saltillo	estados
+Colima	Colima	estados
+Durango	Durango	estados
+Guanajuato	Guanajuato	estados
+Guerrero	Chilpancingo	estados
+Hidalgo	Pachuca	estados
+Jalisco	Guadalajara	estados
+Estado de México	Toluca	estados
+Michoacán	Morelia	estados
+Morelos	Cuernavaca	estados
+Nayarit	Tepic	estados
+Nuevo León	Monterrey	estados
+Oaxaca	Oaxaca	estados
+Puebla	Puebla	estados
+Querétaro	Querétaro	estados
+Quintana Roo	Chetumal	estados
+San Luis Potosí	San Luis Potosí	estados
+Sinaloa	Culiacán	estados
+Sonora	Hermosillo	estados
+Tabasco	Villahermosa	estados
+Tamaulipas	Ciudad Victoria	estados
+Tlaxcala	Tlaxcala	estados
+Veracruz	Xalapa	estados
+Yucatán	Mérida	estados
+Zacatecas	Zacatecas	estados

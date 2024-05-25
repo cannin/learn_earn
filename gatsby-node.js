@@ -6,7 +6,7 @@
 
 // TODO Add reporter to handle errors
 exports.createPages = async ({ actions, graphql }) => {
-  const sets = ['multiplication_10x', 'multiplication_20x', 'us_capitals', 'animals']
+  const sets = ['multiplication_10x', 'multiplication_20x', 'us_capitals', 'animals', 'estados']
 
   const path = require("path")
   const { createPage } = actions
