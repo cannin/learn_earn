@@ -36,7 +36,7 @@ module.exports = {
         background_color: `#CC0000`,
         theme_color: `#CC0000`,
         display: `standalone`,
-        icon: `src/images/red_square_80x80.png`, // This path is relative to the root of the site.
+        icon: `src/images/learn_earn_favico.png`, // This path is relative to the root of the site; red_square_80x80.png
       },
     },
     {
