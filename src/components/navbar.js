@@ -10,6 +10,16 @@ const ExactNavLink = props => (
   <Link getProps={isActive} {...props} />
 )
 
+/*
+<li className="nav-item">
+<ExactNavLink
+  to="/game"
+>
+  Game
+</ExactNavLink>
+</li>
+*/
+
 const Navbar = ({ siteTitle }) => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-primary">
@@ -31,9 +41,9 @@ const Navbar = ({ siteTitle }) => {
             </li>
             <li className="nav-item">
               <ExactNavLink
-                to="/game"
+                to="/games"
               >
-                Game
+                Games
               </ExactNavLink>
             </li>
             <li className="nav-item">

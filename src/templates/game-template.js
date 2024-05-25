@@ -20,7 +20,7 @@ const confettiCount = 2000
 export default function GameTemplate({ data, classes, pageContext }) {
   // Data
   //console.log("DATA 1: " + JSON.stringify(data))
-  data = _.shuffle(data.allQuestionsAllTxt.nodes)
+  data = _.shuffle(data.allQuestionsAllTxt.nodes) // from questions_all.txt
   console.log("DATA: " + JSON.stringify(data))
 
   //console.log("DATA 3: " + JSON.stringify(pageContext))
